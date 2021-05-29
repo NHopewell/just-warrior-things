@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+/.vscode
+
+# Accept these files in the repository
+!.settings.env
+
