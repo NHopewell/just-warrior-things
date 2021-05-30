@@ -30,8 +30,8 @@ class WarriorPost(models.Model):
     )
     source_link = models.TextField()
     title = models.CharField(max_length=500)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    date_posted = models.DateTimeField(null=True)
+    date_scraped = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
