@@ -13,6 +13,8 @@
         crossorigin="anonymous"
     >
     <link href="{% static 'core/main.css' %}" rel="stylesheet">
+    <!--font awesome-->
+    <script src="https://kit.fontawesome.com/ef90c6f2e7.js" crossorigin="anonymous"></script>
 </head>
 <body class="d-flex flex-column h-100">
     
@@ -20,26 +22,16 @@
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Fixed navbar</a>
+          <a class="navbar-brand" href="{% url 'list-warrior-posts' %}">Just Warrior Things</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="#">about JWT</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
@@ -50,10 +42,27 @@
         {% block content %}{% endblock %}
     </main>
     
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-      </div>
+    <footer id="footer" class="footer mt-auto py-3 bg-light">
+        <nav class="navbar justify-content-center">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="https://www.linkedin.com/in/nick-hopewell/" target="blank">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://github.com/NHopewell" target="blank">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://twitter.com/NickHopewell"
+                        target="blank">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </footer>
     
     <!-- JavaScript Bundle with Popper -->
