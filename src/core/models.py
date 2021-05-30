@@ -29,8 +29,9 @@ class WarriorPost(models.Model):
         choices=SourceType.choices,
     )
     source_link = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=500)
+    date_posted = models.DateTimeField(null=True)
+    date_scraped = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
