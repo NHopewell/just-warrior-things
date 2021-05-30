@@ -151,6 +151,11 @@ class RedditWoWScrapper(RedditScraper):
 
 
 
+class RedditClasssicWoWScrapper(RedditScraper):
+    pass
+
+
+
 if __name__ == '__main__':
     
 
