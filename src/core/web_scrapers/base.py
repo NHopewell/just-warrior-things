@@ -23,6 +23,7 @@ class Scraper(ABC):
         self.soup = None
         self.data = []
 
+
     def _bind_soup(self) -> None:
         """
         Binds the resulting data from a requests call on the url passed to
@@ -31,6 +32,7 @@ class Scraper(ABC):
         self.page = requests.get(self.url)
         self.soup = BeautifulSoup(self.page.content, self.parser_type)
     
+
     @staticmethod
     def _parse_date(
         date: str,
@@ -42,6 +44,7 @@ class Scraper(ABC):
         """
 
         return datetime.datetime.strptime(date, input_format).strftime(output_format)
+
 
     @staticmethod
     def _convert_to_military_time(
@@ -56,6 +59,23 @@ class Scraper(ABC):
         date_in_military_time = date + datetime.timedelta(hours=12)
 
         return date_in_military_time.strftime(output_format)
+
+
+    def return_cleaned_date(self, date_with_suffix: List[str], input_format: str) -> str:
+        """
+        Parses an input date to an output format and converts to 24 hour time
+        if input time is in PM.
+        """
+
+        date = " ".join(date_with_suffix[:2])
+        clean_date = self._parse_date(date, input_format)
+        suffix = date_with_suffix[-1].strip()
+
+        if suffix == 'PM':
+            clean_date = self._convert_to_military_time(clean_date, '%Y-%m-%d %H:%M')
+
+        return clean_date
+
 
     @abstractmethod
     def scrape(self)-> List[Tuple[str]]:
