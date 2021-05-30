@@ -34,7 +34,7 @@ class IcyVeinsScrapper(Scraper):
             date_with_suffix = res.ul.li.a.time["title"].split()
             clean_date = self.return_cleaned_date(date_with_suffix, input_format='%m/%d/%Y %H:%M')
 
-            self.data.append(tuple([title, link, clean_date]))
+            self.data.append(tuple([link, title, clean_date]))
 
         return self.data
 
@@ -63,7 +63,7 @@ class MMOChampionScrapper(Scraper):
             date_with_suffix = res.div.dl.find_all('dd')[1].text.split(" ")
             clean_date = self.return_cleaned_date(date_with_suffix, input_format='%Y-%m-%d, %H:%M')
 
-            self.data.append(tuple([title, link, clean_date]))
+            self.data.append(tuple([link, title, clean_date]))
 
         return self.data
 
@@ -145,7 +145,7 @@ class RedditWoWScrapper(RedditScraper):
             title = post.div.h3.span.text
             clean_date = self._convert_posted_ago_to_date(posted.find('a', class_="_3jOxDPIQ0KaOWpzvSQo-1s").text)
 
-            self.data.append(tuple([title, link, clean_date]))
+            self.data.append(tuple([link, title, clean_date]))
 
         return self.data
 
