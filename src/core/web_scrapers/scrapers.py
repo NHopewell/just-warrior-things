@@ -23,7 +23,10 @@ class IcyVeinsScrapper(Scraper):
             title = ancor.text
             link = ancor['href'].split("?")[0]
 
-            self.data.append(tuple([title, link]))
+            date = " ".join(res.ul.li.a.time["title"].split()[:2])
+            clean_date = self._parse_date(date, input_format='%m/%d/%Y %H:%M')
+
+            self.data.append(tuple([title, link, clean_date]))
 
         return self.data
 
@@ -49,9 +52,20 @@ class MMOChampionScrapper(Scraper):
             title = ancor.text
             link = "/".join(["https://www.mmo-champion.com", ancor["href"]])
 
-            self.data.append(tuple([title, link]))
+            date_with_suffix = res.div.dl.find_all('dd')[1].text.split(" ")
+            date = " ".join(date_with_suffix[:2])
+            clean_date = self._parse_date(date, input_format='%Y-%m-%d, %H:%M')
+            suffix = date_with_suffix[2].strip()
+            print(suffix)
+            if suffix == 'PM':
+                clean_date = self._convert_to_military_time(clean_date, '%Y-%m-%d %H:%M')
+
+            self.data.append(tuple([title, link, clean_date]))
 
         return self.data
+
+
+
 
 
 
@@ -65,9 +79,11 @@ if __name__ == '__main__':
 
     print(scraped_icy_veins_data)
     '''
+    
 
     URL = "https://www.mmo-champion.com/forums/278-Warrior?sort=lastpost&order=desc"
     mmo = MMOChampionScrapper(URL)
     mmo_data = mmo.scrape()
+
     
     print(mmo_data)
