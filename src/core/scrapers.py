@@ -39,7 +39,7 @@ class IcyVeinsScraper(Scraper):
                 clean_date = self.return_cleaned_date(date_with_suffix, input_format='%m/%d/%Y %H:%M')
 
                 WarriorPost.objects.create(
-                    original_source=WarriorPost.SourceType.ICY_VEINS,
+                    original_source='Icy Veins',
                     title=title,
                     source_link=link,
                     date_posted=clean_date
@@ -166,7 +166,7 @@ class RedditWoWScraper(RedditScraper):
                 clean_date = self._convert_posted_ago_to_date(posted.find('a', class_="_3jOxDPIQ0KaOWpzvSQo-1s").text)
 
                 WarriorPost.objects.create(
-                        original_source='MMO Champion',
+                        original_source='/r/wow/',
                         title=title,
                         source_link=link,
                         date_posted=clean_date
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 
  
     URL = 'https://www.icy-veins.com/forums/search/?q=warrior&type=forums_topic&updated_after=any&sortby=newest&search_and_or=or&search_in=titles'
-    icy = IcyVeinsScrapper(URL)
+    icy = IcyVeinsScraper(URL)
     icy.scrape()
 
   
@@ -197,7 +197,7 @@ if __name__ == '__main__':
  
     '''
     URL = "https://www.mmo-champion.com/forums/278-Warrior?sort=lastpost&order=desc"
-    mmo = MMOChampionScrapper(URL)
+    mmo = MMOChampionScraper(URL)
     mmo_data = mmo.scrape()
     print(mmo_data)
     '''
@@ -205,7 +205,7 @@ if __name__ == '__main__':
     '''
     URL = 'https://www.reddit.com/r/wow/search/?q=title%3A%22warrior%22&restrict_sr=1&sort=new'
 
-    redditwow = RedditWoWScrapper(URL)
+    redditwow = RedditWoWScraper(URL)
     rdata = redditwow.scrape()
 
     print(rdata)
