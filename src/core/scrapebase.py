@@ -72,7 +72,7 @@ class Scraper(ABC):
         clean_date = self._parse_date(date, input_format)
         suffix = date_with_suffix[-1].strip()
 
-        if suffix == 'PM':
+        if suffix == 'PM' and datetime.datetime.strptime(clean_date, '%Y-%m-%d %H:%M').hour < 12:
             clean_date = self._convert_to_military_time(clean_date, '%Y-%m-%d %H:%M')
 
         return clean_date
